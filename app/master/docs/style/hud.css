@@ -1,0 +1,99 @@
+/* =========
+   HUD CLIMA + HORA (CÁPSULA)
+   ========= */
+
+#time-hud {
+    position: fixed;
+    top: 12px;
+    right: 18px;
+    z-index: 9999;
+}
+
+#time-hud-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 2px solid #2f6f85;
+    background: rgba(6, 15, 22, 0.95);
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.85),
+        0 0 12px rgba(10, 200, 255, 0.4);
+}
+
+#time-hud-pill .hud-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-right: 10px;
+    border-right: 1px solid rgba(160, 231, 255, 0.4);
+}
+
+#time-hud-pill .hud-right {
+    padding-left: 10px;
+    font-size: 26px;
+    color: #fffbe0;
+    text-shadow: 0 0 5px rgba(255, 255, 200, 0.7);
+}
+
+.weather-icon {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+#weather-label {
+    font-size: 18px;
+    color: #f4f9ff;
+}
+
+/* Animaciones según clima */
+
+@keyframes weatherPulse {
+    0%,100% { transform: scale(1); }
+    50%     { transform: scale(1.06); }
+}
+
+@keyframes weatherCloudFloat {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-1px); }
+}
+
+@keyframes weatherRain {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(2px); }
+}
+
+@keyframes weatherStorm {
+    0%, 92%, 100% { filter: brightness(1); }
+    94%          { filter: brightness(2); }
+    96%          { filter: brightness(0.6); }
+    98%          { filter: brightness(1.6); }
+}
+
+@keyframes weatherFog {
+    0%,100% { opacity: 0.75; }
+    50%     { opacity: 0.45; }
+}
+
+@keyframes weatherSnow {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(1.5px); }
+}
+
+@keyframes weatherTornado {
+    0%   { transform: translateX(0) rotate(0deg); }
+    50%  { transform: translateX(-1px) rotate(-4deg); }
+    100% { transform: translateX(1px) rotate(4deg); }
+}
+
+.weather-anim-sunny       { animation: weatherPulse 3.2s ease-in-out infinite; }
+.weather-anim-cloudy      { animation: weatherCloudFloat 4s ease-in-out infinite; }
+.weather-anim-rain        { animation: weatherRain 1.3s linear infinite; }
+.weather-anim-rain-strong { animation: weatherRain 0.9s linear infinite; }
+.weather-anim-storm       { animation: weatherStorm 3.5s steps(1,end) infinite; }
+.weather-anim-fog         { animation: weatherFog 4s ease-in-out infinite; opacity: 0.8; }
+.weather-anim-snow        { animation: weatherSnow 1.8s ease-in-out infinite; }
+.weather-anim-moon        { animation: weatherPulse 4s ease-in-out infinite; }
+.weather-anim-tornado     { animation: weatherTornado 0.6s ease-in-out infinite; }

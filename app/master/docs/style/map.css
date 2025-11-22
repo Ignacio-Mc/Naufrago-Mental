@@ -1,0 +1,41 @@
+/* =========
+   MAPA
+   ========= */
+
+#panel-mapa { min-height: 560px; }
+
+.mapa-body { padding-top: 4px; }
+
+.map-placeholder {
+    min-height: 550px;
+    border-radius: 4px;
+    border: 1px dashed rgba(136,168,186,0.6);
+    background: radial-gradient(circle at top, #102732, #05080e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+}
+
+.room-button {
+    font-family: "VT323", monospace;
+    background: linear-gradient(to bottom, #16485a, #0d323f);
+    border: 1px solid #2f6f85;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.room-button:hover {
+    background: linear-gradient(to bottom, #1a5b71, #0f3b4a);
+    box-shadow: 0 0 6px rgba(46,142,172,0.8);
+}

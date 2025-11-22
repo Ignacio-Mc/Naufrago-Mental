@@ -1,0 +1,47 @@
+/* ================
+   CAPAS DEL CIELO
+   ================ */
+
+#sky-base {
+    position: fixed;
+    inset: 0;
+    z-index: -30;
+    background: radial-gradient(circle at top, #0a1a28 0%, #000 80%);
+    transition: background 0.4s linear;
+}
+
+#sky-stars {
+    position: fixed;
+    inset: 0;
+    z-index: -29;
+    pointer-events: none;
+}
+
+#sky-weather {
+    position: fixed;
+    inset: 0;
+    z-index: -28;
+    pointer-events: none;
+}
+
+#sky-clouds {
+    position: fixed;
+    inset: 0;
+    z-index: -27;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    image-rendering: pixelated;
+    width: 90px;
+    height: 60px;
+    background-image: url("../img/cloud_pixel.png");
+    animation: cloudMove 55s linear infinite;
+}
+
+@keyframes cloudMove {
+    0%   { transform: translateX(-120px); }
+    100% { transform: translateX(calc(100vw + 120px)); }
+}

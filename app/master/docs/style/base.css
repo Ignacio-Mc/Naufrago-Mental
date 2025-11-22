@@ -1,0 +1,40 @@
+/* =========
+   BASE
+   ========= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-main: #051820;
+    --bg-panel: #071f2a;
+    --bg-panel-soft: #0a2a36;
+    --bg-accent: #0f3a4b;
+    --border-soft: #173b4a;
+    --border-strong: #1c5b6f;
+
+    --text-main: #e5f6ff;
+    --text-muted: #88a8ba;
+    --text-accent: #a0e7ff;
+    --text-strong: #f4f9ff;
+
+    --green-bar: #7edb6a;
+    --blue-bar: #64b5ff;
+    --purple-bar: #c991ff;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: "VT323", monospace;
+    background: radial-gradient(circle at top, #0b2f3c 0, #02070b 55%, #010308 100%);
+    color: var(--text-main);
+    transition: background 0.5s linear;
+}

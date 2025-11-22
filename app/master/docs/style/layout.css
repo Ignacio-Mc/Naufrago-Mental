@@ -1,0 +1,61 @@
+/* =========
+   ESTRUCTURA GENERAL
+   ========= */
+
+.game-root {
+    min-height: 100vh;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 8px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.game-header {
+    text-align: center;
+    padding: 4px 0 8px;
+}
+
+.title-main {
+    font-size: 40px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-accent);
+    text-shadow: 0 0 8px rgba(160, 231, 255, 0.5);
+}
+
+.title-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+}
+
+.game-footer {
+    margin-top: 6px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: rgba(2, 9, 14, 0.85);
+    border: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    color: var(--text-muted);
+}
+
+.game-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 240px minmax(400px, 1.6fr) minmax(320px, 1.1fr);
+    gap: 8px;
+    min-height: calc(100vh - 140px);
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.column-right {
+    min-height: 0;
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Náufrago Mental</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fuente pixel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+    <!-- CSS modular -->
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="style/sky.css">
+    <link rel="stylesheet" href="style/hud.css">
+    <link rel="stylesheet" href="style/layout.css">
+    <link rel="stylesheet" href="style/panels.css">
+    <link rel="stylesheet" href="style/character.css">
+    <link rel="stylesheet" href="style/dialog.css">
+    <link rel="stylesheet" href="style/stats.css">
+    <link rel="stylesheet" href="style/map.css">
+    <link rel="stylesheet" href="style/enemy_logbook.css">
+    <link rel="stylesheet" href="style/buttons.css">
+    <link rel="stylesheet" href="style/modal.css">
+    <link rel="stylesheet" href="style/responsive.css">
+</head>
+
+<body>
+
+<!-- ============================================================
+     CAPAS DEL CIELO (FONDO DINÁMICO)
+============================================================ -->
+<div id="sky-base"></div>
+<canvas id="sky-stars"></canvas>
+<canvas id="sky-weather"></canvas>
+<div id="sky-clouds"></div>
+
+<!-- HUD CLIMA + HORA (CÁPSULA) -->
+<div id="time-hud">
+    <div id="time-hud-pill">
+        <div class="hud-left">
+            <img id="weather-icon" class="weather-icon" src="assets/images/weather/Sunny.png" alt="Clima actual">
+            <span id="weather-label">Soleado</span>
+        </div>
+        <div class="hud-right">
+            <span id="time-hud-clock">00:00</span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     RAÍZ DEL JUEGO
+============================================================ -->
+<div class="game-root">
+
+    <!-- HEADER -->
+    <header class="game-header">
+        <div class="title-main">NÁUFRAGO MENTAL</div>
+        <div class="title-sub">The Clicker of Life · Pre-alpha · Prototype</div>
+    </header>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <main class="game-layout">
+
+        <!-- COLUMNA IZQUIERDA -->
+        <section class="column column-left">
+            <article class="panel panel-tall" id="panel-booster">
+                <header class="panel-header"><h2>BONIFICACIONES</h2></header>
+                <div class="panel-body">
+                    <p class="muted">Sin boosters todavía.</p>
+                </div>
+            </article>
+
+            <article class="panel panel-tall" id="panel-consumibles">
+                <header class="panel-header"><h2>POTENCIADORES</h2></header>
+                <div class="panel-body">
+                    <p class="muted">Sin consumibles todavía.</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- COLUMNA CENTRAL -->
+        <section class="column column-center">
+
+            <!-- PERSONAJE -->
+            <article class="panel" id="panel-personaje">
+                <header class="panel-header"><h2>PERSONAJE</h2></header>
+                <div class="panel-body personaje-body">
+
+                    <div class="personaje-viewport">
+                        <div class="dialog-bubble" id="dialog-bubble">…</div>
+                        <div class="personaje-placeholder">
+                            Aquí aparecerá tu náufrago mental.
+                        </div>
+                    </div>
+
+                    <aside class="personaje-stats">
+                        <h3>STATS</h3>
+                        <div class="personaje-stat-line"><span>Nivel:</span><span>1</span></div>
+                        <div class="personaje-stat-line"><span>XP:</span><span>0 / 100</span></div>
+                        <div class="personaje-stat-line"><span>Trabajo:</span><span>Cesante</span></div>
+                        <div class="personaje-stat-line"><span>Estado civil:</span><span>Complicado</span></div>
+                    </aside>
+
+                </div>
+            </article>
+
+            <!-- ESTADOS + BOLSA -->
+            <div class="center-row">
+
+                <article class="panel" id="panel-estados">
+                    <header class="panel-header"><h2>ESTADOS</h2></header>
+                    <div class="panel-body">
+
+                        <div class="stat-block">
+                            <div class="stat-label-row">
+                                <span>Salud</span>
+                                <span class="stat-value" id="stat-salud-text">75/100</span>
+                            </div>
+                            <div class="status-bar">
+                                <div class="status-bar-fill" id="stat-salud-bar" style="width:75%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-block">
+                            <div class="stat-label-row">
+                                <span>Bienestar</span>
+                                <span class="stat-value" id="stat-bienestar-text">45/100</span>
+                            </div>
+                            <div class="status-bar status-bar-blue">
+                                <div class="status-bar-fill" id="stat-bienestar-bar" style="width:45%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-block">
+                            <div class="stat-label-row">
+                                <span>Cordura</span>
+                                <span class="stat-value" id="stat-cordura-text">60/100</span>
+                            </div>
+                            <div class="status-bar status-bar-purple">
+                                <div class="status-bar-fill" id="stat-cordura-bar" style="width:60%;"></div>
+                            </div>
+                        </div>
+
+                        <button class="link-button" id="btn-open-full-stats">
+                            Ver detalles de estados…
+                        </button>
+                    </div>
+                </article>
+
+                <article class="panel" id="panel-bolsa">
+                    <header class="panel-header"><h2>BOLSA</h2></header>
+                    <div class="panel-body bolsa-body">
+                        <p>Inventario básico.</p>
+                        <p>Capacidad inicial: <span class="highlight">30 slots</span>.</p>
+                        <button class="pill-button" id="btn-open-bag">Abrir inventario</button>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- MAPA -->
+            <article class="panel" id="panel-mapa">
+                <header class="panel-header">
+                    <h2>MAPA</h2>
+                    <div class="panel-subtitle">
+                        Próximamente: ciudad, trabajo, carrete, casa…
+                    </div>
+                </header>
+                <div class="panel-body mapa-body">
+                    <div class="map-placeholder">
+                        <div id="map-grid" class="map-grid">
+                            <button class="room-button" data-room="pieza">Pieza</button>
+                            <button class="room-button" data-room="cocina">Cocina</button>
+                            <button class="room-button" data-room="consulta">Consulta</button>
+                            <button class="room-button" data-room="trabajo">Trabajo</button>
+                            <button class="room-button" data-room="calle">Calle</button>
+                            <button class="room-button" data-room="bar">Bar</button>
+                            <button class="room-button" data-room="servicios">Servicios</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- COLUMNA DERECHA -->
+        <section class="column column-right">
+
+            <article class="panel" id="panel-enemigo">
+                <header class="panel-header"><h2>ENEMIGO</h2></header>
+                <div class="panel-body enemigo-body">
+                    <p class="muted">No hay enemigo activo.</p>
+                </div>
+            </article>
+
+            <article class="panel" id="panel-logbook">
+                <header class="panel-header logbook-header">
+                    <h2>LOGBOOK</h2>
+                    <button class="pill-button pill-small" id="btn-clear-log">Limpiar</button>
+                </header>
+                <div class="panel-body logbook-body">
+                    <div id="log-output" class="log-output"></div>
+                </div>
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER HUD SIMPLE -->
+    <footer class="game-footer">
+        <div>Dinero: <span id="hud-money">0</span> $</div>
+        <div>Día: <span id="hud-day">1</span></div>
+    </footer>
+
+    <!-- MODAL ESTADOS COMPLETOS -->
+    <div class="modal-backdrop hidden" id="modal-backdrop"></div>
+    <section class="modal hidden" id="modal-full-stats">
+        <header class="modal-header">
+            <h2>ESTADOS DETALLADOS</h2>
+        </header>
+        <div class="modal-body">
+            <ul class="full-stats-list">
+                <li><span>Sueño</span><span>Pendiente de implementar</span></li>
+                <li><span>Hambre</span><span>…</span></li>
+                <li><span>Sed</span><span>…</span></li>
+                <li><span>Estrés</span><span>…</span></li>
+                <li><span>Relaciones</span><span>…</span></li>
+                <li><span>Adicciones</span><span>…</span></li>
+                <li><span>Finanzas personales</span><span>…</span></li>
+                <li><span>Estado mental</span><span>…</span></li>
+            </ul>
+        </div>
+        <footer class="modal-footer">
+            <button class="pill-button" id="btn-close-full-stats">Cerrar</button>
+        </footer>
+    </section>
+
+</div>
+
+<!-- ============================================================
+     ENTRADA PRINCIPAL DEL JUEGO (MÓDULOS)
+============================================================ -->
+<script type="module" src="scripts/game.js"></script>
+</body>
+</html>

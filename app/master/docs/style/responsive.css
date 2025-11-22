@@ -1,0 +1,29 @@
+/* =========
+   RESPONSIVE
+   ========= */
+
+@media (max-width: 1180px) {
+    .game-layout {
+        grid-template-columns: 220px minmax(0, 1.7fr);
+        grid-template-rows: auto auto;
+    }
+
+    .column-right {
+        flex-direction: row;
+    }
+
+    #panel-enemigo { flex: 1.2; }
+
+    #panel-logbook { flex: 1; }
+}
+
+@media (max-width: 880px) {
+    .game-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .column-right {
+        flex-direction: column;
+    }
+}
