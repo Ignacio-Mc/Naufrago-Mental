@@ -1,0 +1,19 @@
+{
+  "name": "naufrago-mental",
+  "version": "1.0.0",
+  "description": "Juego visual interactivo de Nacho",
+  "type": "module",
+
+  "scripts": {
+    "start": "serve app/master/docs",
+    "dev": "serve app/master/docs -l 3000 --cors",
+
+    "tree": "node app/master/docs/tools/treeFiles.mjs app/master/docs",
+    "paths": "node app/master/docs/tools/verifyPaths.js",
+    "diag": "node app/master/docs/tools/diagnostics.js"
+  },
+
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
