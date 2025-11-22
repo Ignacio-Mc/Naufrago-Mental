@@ -1,18 +1,34 @@
+// ------------------------------------------------------------
+// IMPORTS — MÓDULOS DEL JUEGO
+// ------------------------------------------------------------
 import { initLogbook, addLog } from "./core/logbook.js";
 import { initDialog, showDialog } from "./core/dialog.js";
 import { initRooms } from "./core/rooms.js";
 import { initWeather } from "./core/weather.js";
 import { initSky } from "./core/sky.js";
+import { initTime } from "./core/time.js";
+import { initStats } from "./core/stats.js";
 
+// ------------------------------------------------------------
+// INICIALIZADOR PRINCIPAL
+// ------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar sistemas base
+
+    // 1) Sistemas base primero
     initLogbook();
     initDialog();
-    initSky();
-    initRooms();
-    initWeather();
+    initStats();
+    initTime();          // ⬅️ IMPORTANTE: antes del clima y del cielo
 
+    // 2) Sistemas dependientes del tiempo
+    initWeather();       // depende de initTime()
+    initSky();           // depende de time y weather
+
+    // 3) Sistemas de interacción
+    initRooms();
     initModal();
+
+    // 4) Mensajes iniciales
     showInitialMessages();
 });
 
@@ -39,11 +55,13 @@ function initModal() {
 
     if (btnOpen)  btnOpen.addEventListener("click", open);
     if (btnClose) btnClose.addEventListener("click", close);
+
+    // Cerrar clickeando fuera
     backdrop.addEventListener("click", close);
 }
 
 // ------------------------------------------------------------
-// Mensajes iniciales del juego
+// Mensajes iniciales
 // ------------------------------------------------------------
 function showInitialMessages() {
     addLog("Bienvenido a tu naufragio mental.");
