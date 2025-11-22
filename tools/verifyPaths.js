@@ -6,7 +6,7 @@ import { existsSync } from "fs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// --- Raíz del proyecto ---
+// ROOT = carpeta raíz del proyecto
 const ROOT = join(__dirname, "..");
 
 // --- Carpetas base ---
@@ -17,17 +17,15 @@ const STYLE = join(DOCS, "style");
 
 console.log("\n🧩 Verificando estructura de 'Náufrago Mental'...\n");
 
-// Lista de rutas que deben existir si o si
 const CHECKS = [
     { name: "📄 index.html", path: join(DOCS, "index.html") },
     { name: "📁 /scripts/", path: SCRIPTS },
     { name: "📁 /style/", path: STYLE },
     { name: "📁 assets/images/", path: join(ASSETS, "images") },
     { name: "📁 assets/sounds/", path: join(ASSETS, "sounds") },
-    { name: "📁 assets/fonts/", path: join(ASSETS, "fonts") },
+    { name: "📁 assets/fonts/", path: join(ASSETS, "fonts") }
 ];
 
-// Ejecutar verificaciones
 let allOk = true;
 
 for (const item of CHECKS) {

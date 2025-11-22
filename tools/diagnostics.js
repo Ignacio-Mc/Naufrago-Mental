@@ -3,30 +3,42 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { spawnSync } from "child_process";
 
-// --- Carpeta actual (dentro de /tools o /scripts) ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// --- Mapeo de comandos ---
+// Mapeo de herramientas disponibles
 const scripts = {
-    graph:  ["node", [join(__dirname, "generateGraph.js")]],
-    diag:   ["node", [join(__dirname, "security_and_evolution.js")]],
-    verify: ["node", [join(__dirname, "verifyBuildPaths.js")]],
-    langs:  ["node", [join(__dirname, "checkLanguages.js")]],
-    audit:  ["npm",  ["audit", "--audit-level=moderate"]]
+    tree:    ["node", [join(__dirname, "treeFiles.mjs")]],
+    paths:   ["node", [join(__dirname, "verifyPaths.js")]],
+    langs:   ["node", [join(__dirname, "checkLanguages.js")]],
+    graph:   ["node", [join(__dirname, "generateGraph.js")]],
+    diag:    ["node", [join(__dirname, "security_and_evolution.js")]],
+    summary: ["node", [join(__dirname, "summary.js")]],
 };
 
-// --- Argumento recibido ---
 const arg = process.argv[2];
 
+// Mensaje de ayuda completo
 if (!arg || !scripts[arg]) {
-    console.log("\nUso: node diagnostics.js [graph | diag | verify | langs | audit]\n");
+    console.log(`
+Uso: node diagnostics.js <comando>
+
+Comandos disponibles:
+  tree      → Generar árbol de archivos
+  paths     → Verificar estructura del proyecto
+  langs     → Analizar idiomas
+  graph     → Generar grafo de dependencias / módulos
+  diag      → Informe de seguridad y evolución
+  summary   → Resumen del último análisis
+
+Ejemplo:
+  node diagnostics.js tree
+`);
     process.exit(1);
 }
 
 console.log(`\n🧪 Ejecutando análisis: ${arg}\n`);
 
-// --- Ejecución segura ---
 const [cmd, args] = scripts[arg];
 const result = spawnSync(cmd, args, { stdio: "inherit", shell: true });
 

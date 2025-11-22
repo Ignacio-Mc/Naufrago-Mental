@@ -8,9 +8,9 @@
     "start": "serve app/master/docs",
     "dev": "serve app/master/docs -l 3000 --cors",
 
-    "tree": "node app/master/docs/tools/treeFiles.mjs app/master/docs",
-    "paths": "node app/master/docs/tools/verifyPaths.js",
-    "diag": "node app/master/docs/tools/diagnostics.js"
+    "tree": "node tools/treeFiles.mjs app/master/docs",
+    "paths": "node tools/verifyPaths.js",
+    "diag": "node tools/diagnostics.js"
   },
 
   "dependencies": {
